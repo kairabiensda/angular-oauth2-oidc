@@ -33,8 +33,10 @@ export class DefaultOAuthInterceptor implements HttpInterceptor {
     }
 
     if (this.moduleConfig.resourceServer.allowedUrls) {
-      return !!this.moduleConfig.resourceServer.allowedUrls.find((u) =>
-        url.toLowerCase().startsWith(u.toLowerCase())
+      return !!this.moduleConfig.resourceServer.allowedUrls.find((u) => {
+        console.warn("⚠️ oauth allowedUrls.find", url);
+        url.toLowerCase().startsWith(u.toLowerCase());
+        }
       );
     }
 
@@ -45,6 +47,7 @@ export class DefaultOAuthInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
+    console.warn("⚠️ oauth-intercept", req, req.url);
     const url = req.url.toLowerCase();
 
     if (

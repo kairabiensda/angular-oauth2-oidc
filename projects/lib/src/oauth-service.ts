@@ -1306,6 +1306,7 @@ export class OAuthService extends AuthConfig implements OnDestroy {
     this.removeSessionCheckEventListener();
 
     this.sessionCheckEventListener = (e: MessageEvent) => {
+      console.warn("⚠️ sessionCheckEventListener", e.origin, this.issuer);
       const origin = e.origin.toLowerCase();
       const issuer = this.issuer.toLowerCase();
 
